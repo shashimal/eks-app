@@ -1,0 +1,3 @@
+/.idea/*
+/services/student-service/.mvn/wrapper/maven-wrapper.properties
+/services/student-frontend/.idea/modules.xml
