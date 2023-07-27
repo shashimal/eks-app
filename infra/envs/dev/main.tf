@@ -22,3 +22,10 @@ module "eks" {
   eks_managed_node_groups = local.eks_managed_node_groups
   aws_auth_roles = local.aws_auth_roles
 }
+
+module "github_actions" {
+  source = "../../modules/gha"
+
+  app_name = local.app_name
+  github_repo = "shashimal/eks-app"
+}
