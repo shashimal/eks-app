@@ -17,3 +17,7 @@ output "public_subnets" {
 output "vpc_owner_id" {
   value = module.vpc.vpc_owner_id
 }
+
+output "database_subnet_group" {
+  value = module.vpc.database_subnet_group
+}

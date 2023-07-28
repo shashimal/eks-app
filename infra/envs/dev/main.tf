@@ -10,7 +10,7 @@ module "vpc" {
   enable_nat_gateway = true
   single_nat_gateway = true
 }
-
+#
 module "eks" {
   source = "../../modules/eks"
 
@@ -21,6 +21,16 @@ module "eks" {
   public_subnets = module.vpc.public_subnets
   eks_managed_node_groups = local.eks_managed_node_groups
   aws_auth_roles = local.aws_auth_roles
+}
+
+module "db" {
+  source = "../../modules/rds"
+
+  identifier            = local.app_name
+  instance_class = "db.t2.micro"
+  vpc_cidr              = module.vpc.vpc_cidr
+  vpc_id                = module.vpc.vpc_id
+  database_subnet_group = module.vpc.database_subnet_group
 }
 
 module "github_actions" {
