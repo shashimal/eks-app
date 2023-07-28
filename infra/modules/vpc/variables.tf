@@ -28,6 +28,11 @@ variable "public_subnets" {
   description = "Public subnets"
 }
 
+variable "database_subnets" {
+  type = list(string)
+  description = "Database subnets"
+}
+
 variable "enable_nat_gateway" {
   type = bool
   description = "Enable Nat Gateway"

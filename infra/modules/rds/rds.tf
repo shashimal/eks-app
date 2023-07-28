@@ -2,6 +2,7 @@ module "rds" {
   source  = "terraform-aws-modules/rds/aws"
   version = "~>5.9"
 
+
   identifier     = var.identifier
   engine         = var.engine
   engine_version = var.engine_version
@@ -14,8 +15,14 @@ module "rds" {
 
   db_subnet_group_name   = var.database_subnet_group
   vpc_security_group_ids = [module.rds_security_group.security_group_id]
+  allocated_storage = 20
 
   monitoring_interval = 0
+  deletion_protection = false
+  skip_final_snapshot = true
+  storage_encrypted = false
+  multi_az = false
+
 }
 
 module "rds_security_group" {
