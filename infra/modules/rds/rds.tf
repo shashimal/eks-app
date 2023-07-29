@@ -2,7 +2,6 @@ module "rds" {
   source  = "terraform-aws-modules/rds/aws"
   version = "~>5.9"
 
-
   identifier     = var.identifier
   engine         = var.engine
   engine_version = var.engine_version
@@ -18,6 +17,7 @@ module "rds" {
   allocated_storage = 20
 
   monitoring_interval = 0
+
   deletion_protection = false
   skip_final_snapshot = true
   storage_encrypted = false
@@ -43,4 +43,19 @@ module "rds_security_group" {
       cidr_blocks = var.vpc_cidr
     },
   ]
+}
+
+resource "null_resource" "change_rds_password" {
+  triggers = {
+    updated_count = 1
+  }
+
+  provisioner "local-exec" {
+    working_dir = path.module
+    command     = "${path.module}/rotate-rds-master-password.sh $db_instance_identifier $secret_id"
+    environment = {
+      secret_id      = aws_secretsmanager_secret.db_secret.name
+      db_instance_identifier = var.identifier
+    }
+  }
 }
