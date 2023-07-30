@@ -1,7 +1,7 @@
 {{/*
 Expand the name of the chart.
 */}}
-{{- define "student-chart.name" -}}
+{{- define "student-service.name" -}}
 {{- default .Chart.Name .Values.nameOverride | trunc 63 | trimSuffix "-" }}
 {{- end }}
 
@@ -10,7 +10,7 @@ Create a default fully qualified app name.
 We truncate at 63 chars because some Kubernetes name fields are limited to this (by the DNS naming spec).
 If release name contains chart name it will be used as a full name.
 */}}
-{{- define "student-chart.fullname" -}}
+{{- define "student-service.fullname" -}}
 {{- if .Values.fullnameOverride }}
 {{- .Values.fullnameOverride | trunc 63 | trimSuffix "-" }}
 {{- else }}
@@ -26,16 +26,16 @@ If release name contains chart name it will be used as a full name.
 {{/*
 Create chart name and version as used by the chart label.
 */}}
-{{- define "student-chart.chart" -}}
+{{- define "student-service.chart" -}}
 {{- printf "%s-%s" .Chart.Name .Chart.Version | replace "+" "_" | trunc 63 | trimSuffix "-" }}
 {{- end }}
 
 {{/*
 Common labels
 */}}
-{{- define "student-chart.labels" -}}
-helm.sh/chart: {{ include "student-chart.chart" . }}
-{{ include "student-chart.selectorLabels" . }}
+{{- define "student-service.labels" -}}
+helm.sh/chart: {{ include "student-service.chart" . }}
+{{ include "student-service.selectorLabels" . }}
 {{- if .Chart.AppVersion }}
 app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 {{- end }}
@@ -45,17 +45,17 @@ app.kubernetes.io/managed-by: {{ .Release.Service }}
 {{/*
 Selector labels
 */}}
-{{- define "student-chart.selectorLabels" -}}
-app.kubernetes.io/name: {{ include "student-chart.name" . }}
+{{- define "student-service.selectorLabels" -}}
+app.kubernetes.io/name: {{ include "student-service.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
 
 {{/*
 Create the name of the service account to use
 */}}
-{{- define "student-chart.serviceAccountName" -}}
+{{- define "student-service.serviceAccountName" -}}
 {{- if .Values.serviceAccount.create }}
-{{- default (include "student-chart.fullname" .) .Values.serviceAccount.name }}
+{{- default (include "student-service.fullname" .) .Values.serviceAccount.name }}
 {{- else }}
 {{- default "default" .Values.serviceAccount.name }}
 {{- end }}

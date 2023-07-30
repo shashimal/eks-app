@@ -1,9 +1,9 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ include "student-chart.fullname" . }}
+  name: {{ include "student-service.fullname" . }}
   labels:
-    {{- include "student-chart.labels" . | nindent 4 }}
+    {{- include "student-service.labels" . | nindent 4 }}
 spec:
   type: {{ .Values.service.type }}
   ports:
@@ -12,4 +12,4 @@ spec:
       protocol: TCP
       name: http
   selector:
-    {{- include "student-chart.selectorLabels" . | nindent 4 }}
+    {{- include "student-service.selectorLabels" . | nindent 4 }}
