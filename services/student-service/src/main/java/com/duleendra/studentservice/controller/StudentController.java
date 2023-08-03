@@ -19,6 +19,11 @@ public class StudentController {
         this.studentService = studentService;
     }
 
+    @GetMapping("/health")
+    public String health() {
+        return "UP";
+    }
+
     @GetMapping( "/")
     public Iterable<Student> getStudents() {
         return studentService.getStudents();

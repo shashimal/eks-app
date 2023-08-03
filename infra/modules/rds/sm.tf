@@ -1,3 +1,3 @@
 resource "aws_secretsmanager_secret" "db_secret" {
-  name = "database-secret6"
+  name = "database-secret7"
 }
