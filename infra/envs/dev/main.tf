@@ -11,7 +11,7 @@ module "vpc" {
   enable_nat_gateway = true
   single_nat_gateway = true
 }
-#
+
 module "eks" {
   source = "../../modules/eks"
 
@@ -32,6 +32,18 @@ module "db" {
   vpc_cidr              = module.vpc.vpc_cidr
   vpc_id                = module.vpc.vpc_id
   database_subnet_group = module.vpc.database_subnet_group
+}
+
+module "frontend_app" {
+  source = "../../modules/static-website"
+
+  app_name = local.app_name
+  bucket_name = "${local.app_name}-fronend-app"
+
+  website = {
+    index_document = "index.html"
+    error_document = "index.html"
+  }
 }
 
 module "github_actions" {
