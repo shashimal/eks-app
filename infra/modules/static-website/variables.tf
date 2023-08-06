@@ -39,3 +39,44 @@ variable "website" {
   type        = any # map(string)
   default     = {}
 }
+
+#ACM
+
+variable "domain_name" {
+  description = "Domain name"
+  type        = string
+}
+
+variable "zone_id" {
+  description = "Zone Id"
+  type        = string
+}
+
+variable "subject_alternative_names" {
+  description = "Subject alternative names"
+  type        = list(string)
+}
+
+variable "wait_for_validation" {
+  description = "Wait for validation"
+  type        = bool
+  default     = false
+}
+
+variable "create_certificate" {
+  description = "Whether you need to create ACM certificate"
+  type = bool
+  default = false
+}
+
+variable "create_route53_records" {
+  description = "Whether you want to create route53 records"
+  type = bool
+  default = false
+}
+
+variable "tags" {
+  description = "Tags"
+  type        = any
+  default     = {}
+}
