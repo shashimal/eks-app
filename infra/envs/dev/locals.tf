@@ -2,6 +2,11 @@ locals {
 
   app_name = "sms"
   env = "dev"
+  domain_name = "sms.duleendra.com"
+  subject_alternative_names = [
+    "api.sms.duleendra.com"
+  ]
+
 
   eks_managed_node_groups = {
     general = {
@@ -29,4 +34,13 @@ locals {
       groups   = ["system:masters"]
     },
   ]
+
+  route53_zones = {
+    "sms.duleendra.com" = {
+      comment = "sms.duleendra.com"
+      tags = {
+        env = "production"
+      }
+    }
+  }
 }

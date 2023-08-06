@@ -37,6 +37,10 @@ module "db" {
 module "frontend_app" {
   source = "../../modules/static-website"
 
+  providers = {
+    aws.us-east-1 = aws.us-east-1
+  }
+
   app_name = local.app_name
   bucket_name = "${local.app_name}-fronend-app"
 
@@ -44,7 +48,18 @@ module "frontend_app" {
     index_document = "index.html"
     error_document = "index.html"
   }
+
+  domain_name               = local.domain_name
+  subject_alternative_names = []
+  zone_id                   =  module.route53_zones.zone_ids["sms.duleendra.com"]
 }
+
+module "route53_zones" {
+  source = "../../modules/route53/zones"
+
+  zones_map = local.route53_zones
+}
+
 
 module "github_actions" {
   source = "../../modules/gha"
