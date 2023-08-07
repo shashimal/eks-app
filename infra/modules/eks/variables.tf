@@ -55,3 +55,8 @@ variable "public_subnets" {
 variable "vpc_owner_id" {
   type = string
 }
+
+variable "zone_id" {
+  type = string
+  default = ""
+}

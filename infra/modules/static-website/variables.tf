@@ -75,6 +75,12 @@ variable "create_route53_records" {
   default = false
 }
 
+variable "aliases" {
+  description = "Other domain names"
+  type = list(string)
+  default = []
+}
+
 variable "tags" {
   description = "Tags"
   type        = any

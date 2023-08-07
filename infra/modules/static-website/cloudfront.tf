@@ -3,6 +3,7 @@ module "cloudfront" {
   source = "terraform-aws-modules/cloudfront/aws"
   version = "~>3.2.1"
 
+  aliases = var.aliases
   comment = "CDN for ${var.app_name}"
   enabled = true
   default_root_object = "index.html"
