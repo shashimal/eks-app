@@ -1,3 +1,4 @@
 /.idea/*
 /application/student-service/.mvn/wrapper/maven-wrapper.properties
 /application/student-frontend/.idea/modules.xml
+/infra/envs/dev/.terraform/
