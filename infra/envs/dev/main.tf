@@ -79,23 +79,22 @@ module "route53_cloudfront" {
   depends_on = [module.route53_zones]
 }
 
-#module "route53_eks_alb" {
-#  source = "../../modules/route53/records"
-#
-#  zone_name = module.route53_zones.zone_name["sms.duleendra.com"]
-#  records   = [
-#    {
-#      name = "api.sms.duleendra.com"
-#      type = "A"
-#      alias = {
-#        name    = "k8s-default-students-db89d4414f-847217679.ap-southeast-1.elb.amazonaws.com"
-#        zone_id = "Z08101352708GUIAGOXL0"
-#      }
-#    },
-#  ]
-#  depends_on = [module.route53_zones]
-#}
+module "route53_eks_alb" {
+  source = "../../modules/route53/records"
 
+  zone_name = module.route53_zones.zone_name["sms.duleendra.com"]
+  records   = [
+    {
+      name = "api"
+      type = "A"
+      alias = {
+        name    = "k8s-default-students-db89d4414f-1876843446.ap-southeast-1.elb.amazonaws.com"
+        zone_id = "Z1LMS91P8CMLE5"
+      }
+    },
+  ]
+  depends_on = [module.route53_zones]
+}
 
 module "github_actions" {
   source = "../../modules/gha"
