@@ -1,3 +1,4 @@
+#Creating an EKS cluster with minimal options
 module "eks" {
   source  = "terraform-aws-modules/eks/aws"
   version = "~> 19.0"
